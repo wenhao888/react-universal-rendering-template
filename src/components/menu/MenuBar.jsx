@@ -3,7 +3,6 @@ import styles from "./menuStyles.scss";
 
 class MenuBar extends Component {
     render() {
-
         return (
             <div className={styles.menuBar}>
 
