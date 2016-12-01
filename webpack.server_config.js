@@ -1,8 +1,10 @@
+var path = require('path');
 var webpack= require("webpack");
 var ExternalsPlugin = require('webpack-externals-plugin');
 
 module.exports = {
-    entry: __dirname+"/src/server.js",
+    context: path.join(__dirname, 'src'),
+    entry: path.join(__dirname, "/src/server.js"),
     output: {
         path:__dirname +"/dist",
         filename:"server.js"
@@ -22,21 +24,19 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: [
-                    'isomorphic-style-loader',
-                    'css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]',
-                    'postcss-loader'
-                ]
+                loader: 'isomorphic-style-loader!css-loader?modules=true'
+
             }
         ]
     },
     resolve:{
-        extensions:['','.js', ".jsx"]
+        extensions:['','.js', ".jsx"],
+        root:[path.join(__dirname, 'src')]
     },
     plugins: [
         new ExternalsPlugin({
             type: 'commonjs',
-            include: __dirname + '/node_modules',
+            include: path.join(__dirname ,'/node_modules')
         }),
     ]
 

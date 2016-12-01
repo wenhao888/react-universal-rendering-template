@@ -17,7 +17,7 @@ module.exports = {
                 test: /\.jsx$/, loader: "babel-loader"
             },
             {
-                test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]")
+                test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules=true")
             }
         ]
     },
