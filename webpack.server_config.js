@@ -1,43 +1,41 @@
 var path = require('path');
 var webpack= require("webpack");
-var ExternalsPlugin = require('webpack-externals-plugin');
+var nodeExternals = require('webpack-node-externals');
+
 
 module.exports = {
-    context: path.join(__dirname, 'src'),
-    entry: path.join(__dirname, "/src/server.js"),
+    entry:   path.resolve(__dirname, 'src/server.js'),
     output: {
-        path:__dirname +"/dist",
+        path:path.resolve(__dirname ,"dist"),
         filename:"server.js"
     },
     target:"node",
     node: {
         __dirname: false,
-        __filename: false,
+        __filename: false
     },
     module: {
         loaders:[
             {
-                test:/\.js$/,loader:"babel-loader"
+                test:/\.js$/,loader:"babel-loader",
+                exclude: path.resolve(__dirname ,'node_modules')
             },
             {
-                test:/\.jsx$/,loader:"babel-loader"
+                test:/\.jsx$/,loader:"babel-loader",
+                exclude: path.resolve(__dirname ,'node_modules')
             },
             {
                 test: /\.scss$/,
-                loader: 'isomorphic-style-loader!css-loader?modules=true'
-
+                loaders: [
+                    'isomorphic-style-loader',
+                    'css-loader?modules'
+                ]
             }
         ]
     },
     resolve:{
-        extensions:['','.js', ".jsx"],
-        root:[path.join(__dirname, 'src')]
+        extensions:['','.js', ".jsx"]
     },
-    plugins: [
-        new ExternalsPlugin({
-            type: 'commonjs',
-            include: path.join(__dirname ,'/node_modules')
-        }),
-    ]
+    externals: [nodeExternals()]
 
 };
