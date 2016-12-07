@@ -1,5 +1,7 @@
 import React, {Component} from "react";
+
 import MenuBar from "../menu/MenuBar";
+
 
 class HomeLayout extends Component {
     render()  {
