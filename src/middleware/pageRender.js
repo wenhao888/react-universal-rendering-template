@@ -2,7 +2,7 @@ import React from "react";
 import {renderToString} from 'react-dom/server'
 import {match, RouterContext} from 'react-router'
 import { Provider} from 'react-redux';
-import { ReduxAsyncConnect, loadOnServer, reducer as reduxAsyncConnect } from '../../vendor/redux-async-connect'
+import { ReduxAsyncConnect, loadOnServer, reducer as reduxAsyncConnect } from 'redux-async-connect'
 import routes from "../routes/route";
 import { createStore, combineReducers } from 'redux';
 
@@ -12,7 +12,7 @@ function pageRender(req, res, next) {
 
         const store = createStore(combineReducers({reduxAsyncConnect}));
 
-        loadOnServer(renderProps, store).then(() => {
+        loadOnServer({...renderProps, store:store}).then(() => {
 
 
             const appHTML = renderToString(
