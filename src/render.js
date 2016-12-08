@@ -3,11 +3,11 @@ import {renderToString} from 'react-dom/server'
 import {match, RouterContext} from 'react-router'
 import { Provider} from 'react-redux';
 import { ReduxAsyncConnect, loadOnServer, reducer as reduxAsyncConnect } from 'redux-async-connect'
-import routes from "../routes/route";
+import routes from "./routes/route";
 import { createStore, combineReducers } from 'redux';
 
 
-function pageRender(req, res, next) {
+function render(req, res, next) {
     match({routes, location: "/"}, (error, redirectLocation, renderProps) => {
 
         const store = createStore(combineReducers({reduxAsyncConnect}));
@@ -27,9 +27,6 @@ function pageRender(req, res, next) {
 
 
     });
-
-
-
 }
 
-export default pageRender;
+export default render;

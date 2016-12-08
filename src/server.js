@@ -9,7 +9,7 @@ import morgan from 'morgan';
 import path from 'path';
 
 
-import pageRender from "./middleware/pageRender";
+import render from "./render";
 
 
 var app = express();
@@ -42,7 +42,7 @@ app.use(morgan('combined', {stream: accessLogStream}));
 /**
  * page render will react pages
  */
-app.use(pageRender);
+app.use(render);
 
 
 app.listen(3000, () => console.log('server listening on port 3000!')
